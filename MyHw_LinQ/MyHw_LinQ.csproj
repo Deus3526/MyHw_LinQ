@@ -52,6 +52,11 @@
     <Compile Include="Frm作業_1.designer.cs">
       <DependentUpon>Frm作業_1.cs</DependentUpon>
     </Compile>
+    <Compile Include="NorthWindDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NorthWindDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Frm作業_1.resx">
@@ -66,6 +71,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="NorthWindDataSet.xsc">
+      <DependentUpon>NorthWindDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="NorthWindDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>NorthWindDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="NorthWindDataSet.xss">
+      <DependentUpon>NorthWindDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

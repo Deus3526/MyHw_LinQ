@@ -54,6 +54,9 @@ namespace MyHw_LinQ
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.order_DetailsTableAdapter1 = new MyHw_LinQ.NorthWindDataSetTableAdapters.Order_DetailsTableAdapter();
+            this.ordersTableAdapter1 = new MyHw_LinQ.NorthWindDataSetTableAdapters.OrdersTableAdapter();
+            this.northWindDataSet1 = new MyHw_LinQ.NorthWindDataSet();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -67,6 +70,7 @@ namespace MyHw_LinQ
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.northWindDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -213,7 +217,7 @@ namespace MyHw_LinQ
             this.label3.Location = new System.Drawing.Point(949, 261);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(300, 20);
+            this.label3.Size = new System.Drawing.Size(219, 14);
             this.label3.TabIndex = 135;
             this.label3.Text = "LINQ to Northwind DataSet - Products";
             // 
@@ -225,7 +229,7 @@ namespace MyHw_LinQ
             this.label9.Location = new System.Drawing.Point(937, 134);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(36, 20);
+            this.label9.Size = new System.Drawing.Size(27, 14);
             this.label9.TabIndex = 134;
             this.label9.Text = "年:";
             // 
@@ -237,7 +241,7 @@ namespace MyHw_LinQ
             this.label4.Location = new System.Drawing.Point(57, 22);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(166, 20);
+            this.label4.Size = new System.Drawing.Size(125, 14);
             this.label4.TabIndex = 103;
             this.label4.Text = "LINQ to FileInfo[]";
             // 
@@ -251,6 +255,7 @@ namespace MyHw_LinQ
             this.button6.TabIndex = 133;
             this.button6.Text = "All 訂單 ";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button14
             // 
@@ -285,6 +290,7 @@ namespace MyHw_LinQ
             this.button2.TabIndex = 72;
             this.button2.Text = "     FileInfo[]   - 2017 Created - oerder ";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button13
             // 
@@ -307,7 +313,7 @@ namespace MyHw_LinQ
             this.comboBox1.Location = new System.Drawing.Point(989, 130);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(176, 28);
+            this.comboBox1.Size = new System.Drawing.Size(176, 21);
             this.comboBox1.TabIndex = 125;
             // 
             // button12
@@ -332,6 +338,7 @@ namespace MyHw_LinQ
             this.button4.TabIndex = 124;
             this.button4.Text = "     FileInfo[]   - 大檔案";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // textBox1
             // 
@@ -340,7 +347,7 @@ namespace MyHw_LinQ
             this.textBox1.Location = new System.Drawing.Point(1056, 294);
             this.textBox1.Margin = new System.Windows.Forms.Padding(5);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 31);
+            this.textBox1.Size = new System.Drawing.Size(180, 23);
             this.textBox1.TabIndex = 98;
             this.textBox1.Text = "10";
             // 
@@ -352,7 +359,7 @@ namespace MyHw_LinQ
             this.label1.Location = new System.Drawing.Point(937, 298);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 20);
+            this.label1.Size = new System.Drawing.Size(67, 14);
             this.label1.TabIndex = 99;
             this.label1.Text = "一頁幾筆";
             // 
@@ -364,7 +371,7 @@ namespace MyHw_LinQ
             this.label5.Location = new System.Drawing.Point(524, 34);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(287, 20);
+            this.label5.Size = new System.Drawing.Size(207, 14);
             this.label5.TabIndex = 104;
             this.label5.Text = "LINQ to Northwind DataSet - Orders";
             // 
@@ -376,7 +383,7 @@ namespace MyHw_LinQ
             this.label2.Location = new System.Drawing.Point(574, 519);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 20);
+            this.label2.Size = new System.Drawing.Size(41, 14);
             this.label2.TabIndex = 135;
             this.label2.Text = "Year:";
             // 
@@ -384,14 +391,27 @@ namespace MyHw_LinQ
             // 
             this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
             // 
+            // order_DetailsTableAdapter1
+            // 
+            this.order_DetailsTableAdapter1.ClearBeforeFill = true;
+            // 
+            // ordersTableAdapter1
+            // 
+            this.ordersTableAdapter1.ClearBeforeFill = true;
+            // 
+            // northWindDataSet1
+            // 
+            this.northWindDataSet1.DataSetName = "NorthWindDataSet";
+            this.northWindDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // Frm作業_1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1531, 801);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.label2);
-            this.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm作業_1";
             this.Text = "Frm作業_1";
@@ -409,6 +429,7 @@ namespace MyHw_LinQ
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.northWindDataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -440,5 +461,8 @@ namespace MyHw_LinQ
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private NorthWindDataSetTableAdapters.Order_DetailsTableAdapter order_DetailsTableAdapter1;
+        private NorthWindDataSetTableAdapters.OrdersTableAdapter ordersTableAdapter1;
+        private NorthWindDataSet northWindDataSet1;
     }
 }
