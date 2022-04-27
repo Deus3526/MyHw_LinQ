@@ -17,8 +17,20 @@ namespace MyHw_LinQ
             InitializeComponent();
             ordersTableAdapter1.Fill(northWindDataSet1.Orders);
             order_DetailsTableAdapter1.Fill(northWindDataSet1.Order_Details);
+            LoadYearIntoCombobox();
         }
+        private void LoadYearIntoCombobox()
+        {
+           // var q1 = from or in northWindDataSet1.Orders where Check_null(or) group or by or.OrderDate.Year into g select new { Year=g.Key};
 
+            var q1 = 
+                from or in northWindDataSet1.Orders 
+                select new {Year=or.OrderDate.Year};
+            foreach (var item in q1.Distinct().ToList())
+            {
+                comboBox1.Items.Add(item.Year);
+            }
+        }
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
         {
 
@@ -46,19 +58,22 @@ namespace MyHw_LinQ
         private void button6_Click(object sender, EventArgs e)
         {
             // northWindDataSet1.EnforceConstraints = false;
-            var q1 = from or in northWindDataSet1.Orders  select or;
+            var q1 = from or in northWindDataSet1.Orders where Check_null(or)  select or;
             dataGridView1.DataSource = q1.ToList();
 
-            var q2 = from odr in northWindDataSet1.Order_Details select odr;
+            var q2 = from odr in northWindDataSet1.Order_Details where Check_null(odr) select odr;
             dataGridView2.DataSource = q2.ToList();
         }
         private bool  Check_null(DataRow dr)
         {
-            bool flag = true;
-
-
-            return flag;
-
+            foreach( var item in dr.ItemArray)
+            {
+                if(item is DBNull)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -82,6 +97,33 @@ namespace MyHw_LinQ
             var q = from f in files where f.Length > 5000 select f;
 
             this.dataGridView1.DataSource = q.ToList();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           try
+            {
+                int year = int.Parse(comboBox1.Text);
+                var q1 =
+                    from or in northWindDataSet1.Orders 
+                    where Check_null(or) && or.OrderDate.Year==year 
+                    select or;
+
+                dataGridView1.DataSource = q1.ToList();
+
+                var q2 = 
+                    from odr in northWindDataSet1.Order_Details
+                    join or in northWindDataSet1.Orders on odr.OrderID equals or.OrderID 
+                    where Check_null(odr) && Check_null(or) && or.OrderDate.Year==year 
+                    select odr;
+
+                dataGridView2.DataSource = q2.ToList();
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
     }
 }
