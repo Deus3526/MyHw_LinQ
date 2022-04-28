@@ -57,6 +57,7 @@ namespace MyHw_LinQ
             this.order_DetailsTableAdapter1 = new MyHw_LinQ.NorthWindDataSetTableAdapters.Order_DetailsTableAdapter();
             this.ordersTableAdapter1 = new MyHw_LinQ.NorthWindDataSetTableAdapters.OrdersTableAdapter();
             this.northWindDataSet1 = new MyHw_LinQ.NorthWindDataSet();
+            this.productsTableAdapter1 = new MyHw_LinQ.NorthWindDataSetTableAdapters.ProductsTableAdapter();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -174,6 +175,7 @@ namespace MyHw_LinQ
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(628, 401);
             this.dataGridView1.TabIndex = 71;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // splitContainer1
             // 
@@ -328,6 +330,7 @@ namespace MyHw_LinQ
             this.button12.TabIndex = 97;
             this.button12.Text = "上一頁";
             this.button12.UseVisualStyleBackColor = false;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button4
             // 
@@ -388,10 +391,6 @@ namespace MyHw_LinQ
             this.label2.TabIndex = 135;
             this.label2.Text = "Year:";
             // 
-            // bindingSource1
-            // 
-            this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
-            // 
             // order_DetailsTableAdapter1
             // 
             this.order_DetailsTableAdapter1.ClearBeforeFill = true;
@@ -404,6 +403,10 @@ namespace MyHw_LinQ
             // 
             this.northWindDataSet1.DataSetName = "NorthWindDataSet";
             this.northWindDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // productsTableAdapter1
+            // 
+            this.productsTableAdapter1.ClearBeforeFill = true;
             // 
             // Frm作業_1
             // 
@@ -465,5 +468,6 @@ namespace MyHw_LinQ
         private NorthWindDataSetTableAdapters.Order_DetailsTableAdapter order_DetailsTableAdapter1;
         private NorthWindDataSetTableAdapters.OrdersTableAdapter ordersTableAdapter1;
         private NorthWindDataSet northWindDataSet1;
+        private NorthWindDataSetTableAdapters.ProductsTableAdapter productsTableAdapter1;
     }
 }
