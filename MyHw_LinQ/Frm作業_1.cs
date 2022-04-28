@@ -42,6 +42,9 @@ namespace MyHw_LinQ
             //this.nwDataSet1.Products.Take(10);//Top 10 Skip(10)
 
             //Distinct()
+
+
+
             if (skip > northWindDataSet1.Products.Rows.Count)
             {
                 return;
