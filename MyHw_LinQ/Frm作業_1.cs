@@ -29,12 +29,13 @@ namespace MyHw_LinQ
             // var q1 = from or in northWindDataSet1.Orders where Check_null(or) group or by or.OrderDate.Year into g select new { Year=g.Key};
 
             var q1 = from or in northWindDataSet1.Orders
-                     select new {Year= or.OrderDate.Year };//select  or.OrderDate.Year;
+                            select  or.OrderDate.Year;
 
-            foreach (var item in q1.Distinct())
-            {
-                comboBox1.Items.Add(item.Year);//如果上面寫註解那樣，這邊就寫comboBox1.Items.Add(item);
-            }
+            comboBox1.DataSource = q1.Distinct().ToList();
+            //foreach (var item in q1.Distinct())
+            //{
+            //    comboBox1.Items.Add(item);
+            //}
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -45,7 +46,7 @@ namespace MyHw_LinQ
 
 
 
-            if (skip > northWindDataSet1.Products.Rows.Count)
+            if (skip >=northWindDataSet1.Products.Rows.Count)
             {
                 return;
             }
