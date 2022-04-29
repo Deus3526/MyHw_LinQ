@@ -32,5 +32,15 @@ namespace MyHw_LinQ.Properties {
                 return ((string)(this["NorthWindConnection"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=AdventureWorks;Integrated Security=True")]
+        public string AdventureWorks {
+            get {
+                return ((string)(this["AdventureWorks"]));
+            }
+        }
     }
 }

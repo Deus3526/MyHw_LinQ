@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace MyHw_LinQ
 {
+
     public partial class Frm作業_1 : Form
     {
         bool flag = true;
@@ -78,24 +79,12 @@ namespace MyHw_LinQ
         private void button6_Click(object sender, EventArgs e)
         {
             // northWindDataSet1.EnforceConstraints = false;
-            var q1 = from or in northWindDataSet1.Orders where Check_null(or)  select or;
+            var q1 = from or in northWindDataSet1.Orders where or.Check_null()  select or;
             dataGridView1.DataSource = q1.ToList();
 
-            var q2 = from odr in northWindDataSet1.Order_Details where Check_null(odr) select odr;
+            var q2 = from odr in northWindDataSet1.Order_Details where odr.Check_null()  select odr;
             dataGridView2.DataSource = q2.ToList();
 
-        }
-        private bool  Check_null(DataRow dr)
-        {
-
-            foreach (var item in dr.ItemArray)
-            {
-                if (item is DBNull)
-                {
-                    return false;
-                }
-            }
-            return true;
         }
 
             private void button2_Click(object sender, EventArgs e)
@@ -128,7 +117,7 @@ namespace MyHw_LinQ
                 int year = int.Parse(comboBox1.Text);
                 var q1 =
                     from or in northWindDataSet1.Orders 
-                    where Check_null(or) && or.OrderDate.Year==year 
+                    where or.Check_null() && or.OrderDate.Year==year 
                     select or;
 
                 dataGridView1.DataSource = q1.ToList();
@@ -136,7 +125,7 @@ namespace MyHw_LinQ
                 var q2 = 
                     from odr in northWindDataSet1.Order_Details
                     join or in northWindDataSet1.Orders on odr.OrderID equals or.OrderID 
-                    where Check_null(odr) && Check_null(or) && or.OrderDate.Year==year 
+                    where odr.Check_null() && or.Check_null() && or.OrderDate.Year==year 
                     select odr;
 
                 dataGridView2.DataSource = q2.ToList();
@@ -169,6 +158,21 @@ namespace MyHw_LinQ
             {
                 skip = 0;
             }
+        }
+    }
+    static public class Mehod
+    {
+        static public bool Check_null(this DataRow dr)
+        {
+
+            foreach (var item in dr.ItemArray)
+            {
+                if (item is DBNull)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
