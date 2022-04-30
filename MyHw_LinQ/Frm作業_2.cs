@@ -49,14 +49,14 @@ namespace MyHw_LinQ
             LoadDatagridview(p=>p.SellStartDate.Year== int.Parse(comboBox3.Text)&&(p.SellStartDate.Month/4)==comboBox2.SelectedIndex);
             MessageBox.Show($"共有{dataGridView1.Rows.Count}筆");
         }
-        private void LoadDatagridview(Condition condition)
+        private void LoadDatagridview(System.Func<MyHw_LinQ.AdventureWorksDataSet.ProductRow,bool> condition)
         {
             var q = adventureWorksDataSet1.Product.
-                Where(p=>condition(p)).
+                Where(condition /*p=>condition(p)*/).
                 Select(p=>new { p.ProductID, p.Name, p.ProductNumber, p.SellStartDate });
             dataGridView1.DataSource = q.ToList();
         }
-        delegate bool Condition(AdventureWorksDataSet.ProductRow pr);
+        //delegate bool Condition(AdventureWorksDataSet.ProductRow pr);
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
