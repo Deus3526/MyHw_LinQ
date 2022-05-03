@@ -57,7 +57,7 @@ namespace MyHw_LinQ
             dataGridView1.DataSource = q.ToList();
             dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.ColumnHeader);
         }
-        //delegate bool Condition(AdventureWorksDataSet.ProductRow pr);
+        delegate bool Condition(AdventureWorksDataSet.ProductRow pr);
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
