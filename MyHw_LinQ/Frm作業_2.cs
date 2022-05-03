@@ -55,11 +55,13 @@ namespace MyHw_LinQ
                 Where(condition /*p=>condition(p)*/).
                 Select(p=>new { p.ProductID, p.Name, p.ProductNumber, p.SellStartDate });
             dataGridView1.DataSource = q.ToList();
+            dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.ColumnHeader);
         }
         //delegate bool Condition(AdventureWorksDataSet.ProductRow pr);
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0 || e.RowIndex > dataGridView1.RowCount) return;
             int productID = (int)dataGridView1.Rows[e.RowIndex].Cells["ProductID"].Value;
             var q1 = from ppp in adventureWorksDataSet1.ProductProductPhoto where ppp.ProductID == productID select ppp.ProductPhotoID;
             int photoID = q1.ToList()[0];
