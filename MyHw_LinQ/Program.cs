@@ -16,7 +16,7 @@ namespace MyHw_LinQ
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frm作業_3());
+            Application.Run(new Frm考試());
         }
     }
 }

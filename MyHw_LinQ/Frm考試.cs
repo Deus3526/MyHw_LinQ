@@ -12,6 +12,7 @@ namespace MyHw_LinQ
 {
     public partial class Frm考試 : Form
     {
+        NorthwindEntities northwindEntities = new NorthwindEntities();
         public Frm考試()
         {
             InitializeComponent();
@@ -43,7 +44,7 @@ namespace MyHw_LinQ
         private void button36_Click(object sender, EventArgs e)
         {
             #region 搜尋 班級學生成績
-           
+
             // 
             // 共幾個 學員成績 ?						
 
@@ -60,8 +61,22 @@ namespace MyHw_LinQ
             // 數學不及格 ... 是誰 
             #endregion
 
+            // 共幾個 學員成績 ?						
+
+            // 找出 前面三個 的學員所有科目成績					
+            // 找出 後面兩個 的學員所有科目成績					
+
+            // 找出 Name 'aaa','bbb','ccc' 的學員國文英文科目成績						
+
+            // 找出學員 'bbb' 的成績	                          
+
+            // 找出除了 'bbb' 學員的學員的所有成績 ('bbb' 退學)	
+
+            // 找出 'aaa', 'bbb' 'ccc' 學員 國文數學兩科 科目成績  |				
+            // 數學不及格 ... 是誰 
+
         }
-  
+
         private void button37_Click(object sender, EventArgs e)
         {
             //個人 sum, min, max, avg
@@ -101,6 +116,24 @@ namespace MyHw_LinQ
 
             // 每年 總銷售分析 圖
             // 每月 總銷售分析 圖
+
+            var q = from od in northwindEntities.Order_Details.AsEnumerable()
+                    group od by od.Order.OrderDate.Value.Year + "年" + od.Order.OrderDate.Value.Month + "月" into g
+                    select new {  g.Key, Total = g.Sum(od => od.UnitPrice * od.Quantity * (decimal)(1 - od.Discount)) };
+
+            chart1.DataSource = q.ToList();
+            chart1.Series[0].XValueMember = "Key";
+            chart1.Series[0].YValueMembers = "Total";
+            chart1.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Column;
+
+            //var q2 = from od in northwindEntities.Order_Details.AsEnumerable()
+            //         group od by od.Order.OrderDate.Value.Year+"年1月" into g
+            //         select new {g.Key, Total = g.Sum(od => od.UnitPrice * od.Quantity * (decimal)(1 - od.Discount)) };
+
+            //chart1.DataSource = q2.ToList();
+            //chart1.Series[1].XValueMember = "Key";
+            //chart1.Series[1].YValueMembers = "Total";
+            //chart1.Series[1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Column;
         }
 
       
