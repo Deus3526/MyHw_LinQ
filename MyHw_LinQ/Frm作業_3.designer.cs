@@ -53,7 +53,6 @@ namespace MyHw_LinQ
             this.button38 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
@@ -205,6 +204,7 @@ namespace MyHw_LinQ
             // treeView1
             // 
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeView1.Location = new System.Drawing.Point(4, 266);
             this.treeView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeView1.Name = "treeView1";
@@ -213,7 +213,6 @@ namespace MyHw_LinQ
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.button10);
             this.panel1.Controls.Add(this.label4);
@@ -254,6 +253,7 @@ namespace MyHw_LinQ
             this.button10.TabIndex = 133;
             this.button10.Text = " Orders -  Group by 年 / 月";
             this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // label4
             // 
@@ -288,6 +288,7 @@ namespace MyHw_LinQ
             this.button9.TabIndex = 91;
             this.button9.Text = "     NW 產品最高單價前 5 筆 (包括類別名稱)";
             this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button2
             // 
@@ -299,6 +300,7 @@ namespace MyHw_LinQ
             this.button2.TabIndex = 129;
             this.button2.Text = "總銷售金額";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button7
             // 
@@ -310,6 +312,7 @@ namespace MyHw_LinQ
             this.button7.TabIndex = 92;
             this.button7.Text = "     NW 產品有任何一筆單價大於300 ?";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // label1
             // 
@@ -345,6 +348,7 @@ namespace MyHw_LinQ
             this.button8.TabIndex = 94;
             this.button8.Text = "NW Products 低中高 價產品 ";
             this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button38
             // 
@@ -369,6 +373,7 @@ namespace MyHw_LinQ
             this.button1.TabIndex = 125;
             this.button1.Text = "銷售最好的top 5業務員";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button15
             // 
@@ -380,16 +385,7 @@ namespace MyHw_LinQ
             this.button15.TabIndex = 121;
             this.button15.Text = " Orders -  Group by 年";
             this.button15.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(355, 6);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(67, 40);
-            this.button3.TabIndex = 135;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // Frm作業_3
             // 
@@ -443,6 +439,5 @@ namespace MyHw_LinQ
         private System.Windows.Forms.Button button38;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button button3;
     }
 }

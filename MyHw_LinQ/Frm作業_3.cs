@@ -12,6 +12,7 @@ namespace MyHw_LinQ
 {
     public partial class Frm作業_3 : Form
     {
+        NorthwindEntities northwindEntities = new NorthwindEntities();
         public Frm作業_3()
         {
             InitializeComponent();
@@ -139,10 +140,131 @@ namespace MyHw_LinQ
             #endregion
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
         {
-            int a = 1;
-            MessageBox.Show(((object)a).GetType().ToString());
+            AllClear();
+            var q = from p in northwindEntities.Products.AsEnumerable()
+                    orderby p.UnitPrice descending
+                    select p;
+            dataGridView1.DataSource = q.ToList();
+                    
+
+            var q2 = from p in northwindEntities.Products.AsEnumerable()
+                    orderby p.UnitPrice descending
+                    group p by DefineProductPrice(p) into g
+            select new { g.Key,Count=g.Count(),MyGroup=g};
+            dataGridView2.DataSource = q2.ToList();
+
+            foreach (var g in q2)
+            {
+                TreeNode node = treeView1.Nodes.Add(g.Key.ToString(), g.Key.ToString());
+                foreach (var n in g.MyGroup)
+                {
+                    node.Nodes.Add($"{n.ProductName,-35}---({n.UnitPrice:c2})");
+                }
+            }
+        }
+        string DefineProductPrice(Product p)
+        {
+            if (p.UnitPrice < 20) return "低價產品";
+            else if (p.UnitPrice < 50) return "中價產品";
+            else return "高價產品";
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            AllClear();
+            var q = from o in northwindEntities.Orders.AsEnumerable()
+                    orderby o.OrderDate.Value.Year 
+                    select o;
+            dataGridView1.DataSource = q.ToList();
+
+
+            var q2 = from o in northwindEntities.Orders.AsEnumerable()
+                     orderby o.OrderDate.Value.Year
+                     group o by o.OrderDate.Value.Year into g
+                     select new { g.Key, Count = g.Count(), MyGroup = g };
+            dataGridView2.DataSource = q2.ToList();
+
+            foreach (var g in q2.ToList())
+            {
+                TreeNode node = treeView1.Nodes.Add(g.Key.ToString(), g.Key.ToString());
+                foreach (var n in g.MyGroup)
+                {
+                    node.Nodes.Add($"{n.CustomerID,-20}---({n.OrderDate})");
+                }
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            AllClear();
+            var q = from o in northwindEntities.Orders.AsEnumerable()
+                    orderby o.OrderDate.Value.Year,o.OrderDate.Value.Month
+                    select o;
+            dataGridView1.DataSource = q.ToList();
+
+
+            var q2 = from o in northwindEntities.Orders.AsEnumerable()
+                     orderby o.OrderDate.Value.Year,o.OrderDate.Value.Month
+                     group o by DefineOrdersYearMonth(o) into g
+                     select new { g.Key, Count = g.Count(), MyGroup = g };
+            dataGridView2.DataSource = q2.ToList();
+
+            foreach (var g in q2.ToList())
+            {
+                TreeNode node = treeView1.Nodes.Add(g.Key.ToString(), g.Key.ToString());
+                foreach (var n in g.MyGroup)
+                {
+                    node.Nodes.Add($"{n.CustomerID,-20}---({n.OrderDate})");
+                }
+            }
+        }
+        string DefineOrdersYearMonth(Order o)
+        {
+            return o.OrderDate.Value.Year + "年 " + o.OrderDate.Value.Month + "月";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var q = from od in northwindEntities.Order_Details.AsEnumerable()
+                     group od by od.Order.OrderDate.Value.Year into g
+                     select new { Year=g.Key,Total=g.Sum(od=>od.UnitPrice * od.Quantity * (decimal)(1 - od.Discount))};
+            dataGridView1.DataSource = q.ToList();
+
+            var q2 = from od in northwindEntities.Order_Details.AsEnumerable()
+                     group od by true  into g
+                     select new {總銷售金額 = g.Sum(od => od.UnitPrice * od.Quantity * (decimal)(1 - od.Discount)) };
+            dataGridView2.DataSource = q2.ToList();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var q = from od in northwindEntities.Order_Details.AsEnumerable()
+                    group od by od.Order.Employee.FirstName+"  "+od.Order.Employee.LastName/*Customer(od)*/ into g
+                    orderby g.Sum(od => od.UnitPrice * od.Quantity * (decimal)(1 - od.Discount)) descending
+                    select new { g.Key,Total=$"{g.Sum(od=> od.UnitPrice * od.Quantity * (decimal)(1 - od.Discount)):c2}" };
+            dataGridView1.DataSource = q.Take(5).ToList();
+        }
+        string Customer(Order_Detail od)
+        {
+
+            return od.Order.Employee.FirstName + "  " + od.Order.Employee.LastName;
+        }
+        private void button7_Click(object sender, EventArgs e)
+        {
+            bool result = northwindEntities.Products.Any(p => p.UnitPrice > 300);
+            MessageBox.Show(result.ToString());
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            var q = from c in northwindEntities.Categories
+                    from p in c.Products
+                    orderby p.UnitPrice descending
+                    select new { c.CategoryName, p.ProductName, p.UnitPrice };
+
+            dataGridView1.DataSource = q.Take(5).ToList();
         }
     }
 }
