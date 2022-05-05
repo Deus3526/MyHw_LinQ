@@ -239,6 +239,7 @@ namespace MyHw_LinQ
 
         private void button35_Click(object sender, EventArgs e)
         {
+            chart3.Series.Clear();
             // 統計 :　所有隨機分數出現的次數/比率; sort ascending or descending
             // 63     7.00%
             // 100    6.00%
@@ -375,6 +376,17 @@ namespace MyHw_LinQ
             chart3.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.RangeColumn;
             chart3.Series[0].IsValueShownAsLabel = true;
             chart3.Series[0].Label = "#VAL{P}";
+
+
+            //chart2.Series.Add("年銷售成長率");
+            //foreach(var q in list)
+            //{
+            //    chart2.Series[1].Points.AddXY(q.Year, q.Rate);
+            //}
+            //chart2.Series[1].XAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
+            //chart2.Series[1].YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
+            //chart2.Series[1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+          
         }
         class Rate_Year
         {
