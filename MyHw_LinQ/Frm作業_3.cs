@@ -101,7 +101,6 @@ namespace MyHw_LinQ
                      select new { Key = g.Key, Count = g.Count(), MyGroup = g };
             dataGridView1.DataSource = q.ToList();
             dataGridView2.DataSource = q2.ToList();
-
             foreach (var g in q2.ToList())
             {
                 TreeNode node = treeView1.Nodes.Add(g.Key.ToString(), g.Key.ToString());
@@ -111,6 +110,7 @@ namespace MyHw_LinQ
                 }
             }
         }
+
         private void button6_Click(object sender, EventArgs e)
         {
             Load_LinQ_FileInfo(f => f.CreationTime, f => f.CreationTime.Year);
